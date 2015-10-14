@@ -1,0 +1,34 @@
+{
+  "name": "google-id-token-verifier",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./lib/main.js",
+  "scripts": {
+    "lint": "jshint lib test",
+    "test": "mocha test",
+    "prepare": "npm run lint && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maeltm/node-google-id-token-verifier.git"
+  },
+  "keywords": [
+    "googleapi",
+    "id-token"
+  ],
+  "author": "Changhoon Maeng <maeltm18@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maeltm/node-google-id-token-verifier/issues"
+  },
+  "homepage": "https://github.com/maeltm/node-google-id-token-verifier#readme",
+  "devDependencies": {
+    "jshint": "^2.8.0",
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.1"
+  },
+  "dependencies": {
+    "request": "^2.65.0",
+    "underscore": "^1.8.3"
+  }
+}
