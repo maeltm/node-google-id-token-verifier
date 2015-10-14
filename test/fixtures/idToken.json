@@ -1,0 +1,9 @@
+{
+  "iss": "accounts.google.com",
+  "aud": "clientId",
+  "sub": "12345678901234567890",
+  "email": "test@test.com",
+  "iat": "0",
+  "exp": "0",
+  "name": "testname"
+}
