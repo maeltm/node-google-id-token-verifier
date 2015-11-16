@@ -5,8 +5,10 @@
   "main": "./lib/main.js",
   "scripts": {
     "lint": "jshint lib test",
-    "test": "mocha test",
-    "prepare": "npm run lint && npm test"
+    "test": "mocha --reporter spec test",
+    "prepare": "npm run lint && npm test",
+    "coverage": "istanbul cover _mocha --report text -- -R spec test",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- --reporter spec && cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,8 @@
   },
   "homepage": "https://github.com/maeltm/node-google-id-token-verifier#readme",
   "devDependencies": {
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.4.0",
     "jshint": "^2.8.0",
     "mocha": "^2.3.3",
     "sinon": "^1.17.1"

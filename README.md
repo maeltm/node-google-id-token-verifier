@@ -1,6 +1,7 @@
 # node-google-id-token-verifier
 
 [![Build Status](https://travis-ci.org/maeltm/node-google-id-token-verifier.svg?branch=master)](https://travis-ci.org/maeltm/node-google-id-token-verifier)
+[![Coverage Status](https://coveralls.io/repos/maeltm/node-google-id-token-verifier/badge.svg?branch=master&service=github)](https://coveralls.io/github/maeltm/node-google-id-token-verifier?branch=master)
 
 This is library to validate a google ID token for consuming it in [node.js][node] backend server.
 This is very similar to google's [tokeninfo endpoint][tokeninfo].
