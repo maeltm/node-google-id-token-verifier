@@ -132,9 +132,9 @@ describe('verifying google idToken', function () {
     var payload = makeValidPayload(_.clone(testToken));
     var envelope = _.clone(testEnvelope);
     var data = makeFakeIdToken(payload, envelope);
-    data += 'InvalidSignature';
+    var invalidSignatureData = data.substring(0, data.lastIndexOf('.') + 1) + 'InvalidSignature';
 
-    verifier.verify(data, payload.aud, function (error, tokenInfo) {
+    verifier.verify(invalidSignatureData, payload.aud, function (error, tokenInfo) {
       assert.equal(_.isError(error), true);
       assert.equal(error.message, 'Invalid Signature');
       assert.equal(_.isEmpty(tokenInfo), true);
