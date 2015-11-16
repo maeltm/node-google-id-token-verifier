@@ -16,8 +16,8 @@
     "googleapi",
     "id-token"
   ],
-  "author": "Changhoon Maeng <maeltm18@gmail.com>",
-  "license": "MIT",
+  "author": "Catstail <maeltm18@gmail.com>",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/maeltm/node-google-id-token-verifier/issues"
   },
