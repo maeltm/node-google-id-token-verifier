@@ -1,10 +1,16 @@
-# node-google-id-token-verifier
+# google-id-token-verifier
 
 [![Build Status](https://travis-ci.org/maeltm/node-google-id-token-verifier.svg?branch=master)](https://travis-ci.org/maeltm/node-google-id-token-verifier)
 [![Coverage Status](https://coveralls.io/repos/maeltm/node-google-id-token-verifier/badge.svg?branch=master&service=github)](https://coveralls.io/github/maeltm/node-google-id-token-verifier?branch=master)
 
 This is library to validate a google ID token for consuming it in [node.js][node] backend server.
 This is very similar to google's [tokeninfo endpoint][tokeninfo].
+
+## Installation
+
+```bash
+npm install google-id-token-verifier --save
+```
 
 ## Usage
 
@@ -24,6 +30,36 @@ verifier.verify(IdToken, clientId, function (err, tokenInfo) {
   }
 });
 ```
+
+## Tests
+
+```bash
+npm test
+```
+or
+```bash
+npm prepare
+```
+
+## Contributing
+
+In lieu of a formal styleguide, take care to maintain the existing coding style.
+Add unit tests for any new or changed functionality. Lint and test your code.
+
+## Third-party libraries
+
+The following third-party libraries are used by this module:
+
+* request: https://github.com/request/request - to get google's oauth2 federated signon certs.
+
+## Inspired by
+
+* google-auth-library-nodejs - https://github.com/google/google-auth-library-nodejs
+* google-id-token - https://github.com/gmelika/google-id-token
+
+## Release History
+
+* 0.1.0 Initial release
 
 [node]: http://nodejs.org/
 [tokeninfo]: https://www.googleapis.com/oauth2/v3/tokeninfo
