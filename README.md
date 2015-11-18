@@ -1,5 +1,4 @@
 # google-id-token-verifier
-
 [![Build Status][travisimg]][travis]
 [![Coverage Status][coverallsimg]][coveralls]
 
@@ -51,6 +50,7 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 The following third-party libraries are used by this module:
 
 * request: https://github.com/request/request - to get google's oauth2 federated signon certs.
+* underscore: http://underscorejs.org
 
 ## Inspired by
 
