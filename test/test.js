@@ -57,7 +57,6 @@ describe('verifying google idToken', function () {
 
     verifier.verify(data, payload.aud, function (error, tokenInfo) {
       assert.equal(_.isError(error), false);
-      assert.equal(request.get.called, true);
       assert.equal(tokenInfo.sub, payload.sub);
       done();
     });
