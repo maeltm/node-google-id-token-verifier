@@ -11,6 +11,9 @@ var testEnvelope = require('./fixtures/envelope');
 var testToken = require('./fixtures/idToken');
 var testOAuthCerts = require('./fixtures/oauthcerts');
 
+var GOOGLE_OAUTH2_FEDERATED_SIGNON_CERTS_URL_ = 'https://www.googleapis.com/oauth2/v1/certs';
+var GOOGLE_TOKEN_URL = 'https://www.googleapis.com/oauth2/v4/token';
+
 function makeFakeIdToken(payload, envelope) {
   var privateKey = fs.readFileSync('./test/fixtures/private.pem', 'utf-8');
 
@@ -40,8 +43,16 @@ function makeValidPayload(payload) {
 describe('verifying google idToken', function () {
   before(function (done) {
     sinon
-      .stub(request, 'get')
-      .yields(null, { statusCode: 200, headers: {} }, testOAuthCerts);
+      .stub(request, 'get', function (options, callback) {
+        if (options.uri === GOOGLE_OAUTH2_FEDERATED_SIGNON_CERTS_URL_) {
+          callback(null, { statusCode: 200, headers: {} }, testOAuthCerts);
+        } else if (options.uri === GOOGLE_TOKEN_URL) {
+          var payload = makeValidPayload(_.clone(testToken));
+          var envelope = _.clone(testEnvelope);
+          var idToken = makeFakeIdToken(payload, envelope);
+          callback(null, { statusCode: 200, headers: {} }, JSON.stringify({ id_token: idToken }));
+        }
+      });
     done();
   });
 
@@ -165,6 +176,21 @@ describe('verifying google idToken', function () {
       assert.equal(_.isError(error), true);
       assert.equal(error.message, 'Expired idToken');
       assert.equal(_.isEmpty(tokenInfo), true);
+      done();
+    });
+  });
+
+  it('should succeed to verify with valid authCode', function (done) {
+    var secret = {
+      web: {
+        client_id: testToken.aud,
+        client_secret: 'test secret'
+      }
+    };
+
+    verifier.verifyWithAuthCode(secret, 'testCode', function (error, tokenInfo) {
+      assert.equal(_.isError(error), false);
+      assert.equal(tokenInfo.sub, testToken.sub);
       done();
     });
   });
