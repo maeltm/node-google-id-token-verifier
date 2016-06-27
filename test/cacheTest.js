@@ -17,6 +17,8 @@ describe('certCache', function () {
     stub
       .onSecondCall().yields(null, { statusCode: 200, headers: {} }, openid_configuration);
     stub
+      .onThirdCall().yields(new Error('timeout'), { statusCode: 404, headers: {} }, null);
+    stub
       .yields(null, { statusCode: 200, headers: {
         'cache-control': 'public, max-age=' + cacheAge + ', must-revalidate, no-transform'
         } }, testOAuthCerts);
@@ -34,16 +36,16 @@ describe('certCache', function () {
       assert.equal(request.get.callCount, 1);
       assert.equal(_.isEmpty(keys), true);
       certCache.global.getFederatedGoogleCerts(function (err, keys) {
-        assert.equal(_.isEmpty(err), true);
+        assert.equal(_.isEmpty(err), false);
         assert.equal(request.get.callCount, 3);
-        assert.equal(_.isEmpty(keys), false);
+        assert.equal(_.isEmpty(keys), true);
         certCache.global.getFederatedGoogleCerts(function (err, keys) {
           assert.equal(_.isEmpty(err), true);
-          assert.equal(request.get.callCount, 3);
+          assert.equal(request.get.callCount, 4);
           assert.equal(_.isEmpty(keys), false);
           certCache.global.getFederatedGoogleCerts(function (err, keys) {
             assert.equal(_.isEmpty(err), true);
-            assert.equal(request.get.callCount, 3);
+            assert.equal(request.get.callCount, 4);
             assert.equal(_.isEmpty(keys), false);
             done();
           });
