@@ -1,6 +1,6 @@
 {
   "name": "google-id-token-verifier",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A small library to validate a google ID token for consuming it in node.js backend server.",
   "main": "./lib/main.js",
   "scripts": {
