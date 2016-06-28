@@ -59,6 +59,7 @@ The following third-party libraries are used by this module:
 
 ## Release History
 
+* 0.2.0 Make CertCache get certs url from discovery document (Thx cakenggt).
 * 0.1.0 Initial release
 
 [travisimg]: https://travis-ci.org/maeltm/node-google-id-token-verifier.svg?branch=master
