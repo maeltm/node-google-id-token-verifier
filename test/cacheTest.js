@@ -5,7 +5,6 @@ var assert = require('assert');
 var sinon = require('sinon');
 var request = require('request');
 var certCache = require('../lib/certCache');
-var openid_configuration = require('./fixtures/openid-configuration');
 var testOAuthCerts = require('./fixtures/oauthcerts');
 
 describe('certCache', function () {
@@ -15,9 +14,7 @@ describe('certCache', function () {
     stub
       .onFirstCall().yields(new Error('timeout'), { statusCode: 404, headers: {} }, null);
     stub
-      .onSecondCall().yields(null, { statusCode: 200, headers: {} }, openid_configuration);
-    stub
-      .onThirdCall().yields(new Error('timeout'), { statusCode: 404, headers: {} }, null);
+      .onSecondCall().yields(null, { statusCode: 200, headers: {} }, testOAuthCerts);
     stub
       .yields(null, { statusCode: 200, headers: {
         'cache-control': 'public, max-age=' + cacheAge + ', must-revalidate, no-transform'
@@ -36,16 +33,16 @@ describe('certCache', function () {
       assert.equal(request.get.callCount, 1);
       assert.equal(_.isEmpty(keys), true);
       certCache.global.getFederatedGoogleCerts(function (err, keys) {
-        assert.equal(_.isEmpty(err), false);
-        assert.equal(request.get.callCount, 3);
-        assert.equal(_.isEmpty(keys), true);
+        assert.equal(_.isEmpty(err), true);
+        assert.equal(request.get.callCount, 2);
+        assert.equal(_.isEmpty(keys), false);
         certCache.global.getFederatedGoogleCerts(function (err, keys) {
           assert.equal(_.isEmpty(err), true);
-          assert.equal(request.get.callCount, 4);
+          assert.equal(request.get.callCount, 3);
           assert.equal(_.isEmpty(keys), false);
           certCache.global.getFederatedGoogleCerts(function (err, keys) {
             assert.equal(_.isEmpty(err), true);
-            assert.equal(request.get.callCount, 4);
+            assert.equal(request.get.callCount, 3);
             assert.equal(_.isEmpty(keys), false);
             done();
           });
