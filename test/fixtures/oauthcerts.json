@@ -1,6 +1,7 @@
 {
-  "keyid": {
+  "keys": [{
+    "kid":"keyid",
     "n": "APNT6MtPNbrXngmh7PGt3b7mkI1g/QdxoyhioTJd81GmQ0TvCtBQQbzfSjhBxpp7YGGpmi6PBJbtGRHqHQWR3RZNHyHknytIY0e//WMmhRSM/2Jn/lIUDIgjIRh8M+q2cDiIXVBY7aVdaUQVK5mPAz/yMGZ4bOiLDXtqQ1OEjDw3",
     "e": "AQAB"
-  }
+  }]
 }
